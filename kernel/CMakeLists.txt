@@ -1,5 +1,6 @@
 set(KERNEL_SOURCES
 	init/main.cpp
+	init/console.cpp
 	init/boot.s
 )
 
