@@ -1,5 +1,4 @@
 #include "gdt.h"
-#include "console.h"
 
 #define BIT32 0xFFFFFFFF
 
@@ -21,7 +20,6 @@ void GDT::SetGate(uint16_t entry, uint32_t base, uint32_t limit, uint8_t access,
 }
 
 void GDT::Install() {
-    kprint("Setting up GDT\n");
     gdtr.limit = (sizeof(GDT::Entry) * 6) - 1;
     gdtr.base = (uint32_t)&gdt;
 

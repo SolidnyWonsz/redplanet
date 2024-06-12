@@ -3,6 +3,7 @@ set(KERNEL_SOURCES
 	init/console.cpp
 	init/boot.s
 	init/gdt.cpp
+	init/idt.cpp
 )
 
 add_link_options(-T${PROJECT_SOURCE_DIR}/kernel/init/linker.ld)
