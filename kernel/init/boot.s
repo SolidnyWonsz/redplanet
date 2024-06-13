@@ -27,6 +27,7 @@ _start:
 	floating point instructions and exceptions must be initialized here.
 	*/
 
+	push %ebx
 	call kernel_init
 
 	cli

@@ -4,6 +4,8 @@ set(KERNEL_SOURCES
 	init/boot.s
 	init/gdt.cpp
 	init/idt.cpp
+	library/stdlib.cpp
+	memory/pmm.cpp
 )
 
 add_link_options(-T${PROJECT_SOURCE_DIR}/kernel/init/linker.ld)
@@ -12,7 +14,7 @@ add_link_options(-O2)
 add_link_options(-nostdlib)
 add_link_options(-lgcc)
 
-include_directories(include)
+include_directories(.)
 
 add_executable(redplanet ${KERNEL_SOURCES})
 
