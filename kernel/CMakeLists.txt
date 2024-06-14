@@ -6,6 +6,7 @@ set(KERNEL_SOURCES
 	init/idt.cpp
 	library/stdlib.cpp
 	memory/pmm.cpp
+	memory/vmm.cpp
 )
 
 add_link_options(-T${PROJECT_SOURCE_DIR}/kernel/init/linker.ld)
