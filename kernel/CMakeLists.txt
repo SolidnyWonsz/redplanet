@@ -7,6 +7,8 @@ set(KERNEL_SOURCES
 	library/stdlib.cpp
 	memory/pmm.cpp
 	memory/vmm.cpp
+	memory/heap.cpp
+	debug/assert.cpp
 )
 
 add_link_options(-T${PROJECT_SOURCE_DIR}/kernel/init/linker.ld)
