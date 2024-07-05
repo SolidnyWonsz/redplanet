@@ -26,3 +26,13 @@ add_custom_target(grub-iso
     DEPENDS redplanet
     USES_TERMINAL
 )
+
+add_custom_target(grub2-iso
+    COMMAND mkdir -p ${PROJECT_SOURCE_DIR}/iso/boot/grub
+    COMMAND cp ${PROJECT_SOURCE_DIR}/meta/grub.cfg ${PROJECT_SOURCE_DIR}/iso/boot/grub
+    COMMAND cp ${CMAKE_BINARY_DIR}/kernel/redplanet ${PROJECT_SOURCE_DIR}/iso/boot
+    COMMAND grub2-mkrescue iso -o ${PROJECT_BINARY_DIR}/redplanet.iso
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    DEPENDS redplanet
+    USES_TERMINAL
+)

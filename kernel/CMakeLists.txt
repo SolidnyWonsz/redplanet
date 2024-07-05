@@ -4,8 +4,9 @@ set(KERNEL_SOURCES
 	init/boot.s
 	init/gdt.cpp
 	init/idt.cpp
-	library/stdlib.cpp
-	memory/pmm.cpp
+	library/cstdlib.cpp
+	library/cstring.cpp
+	#memory/pmm.cpp
 	memory/vmm.cpp
 	memory/heap.cpp
 	debug/assert.cpp
