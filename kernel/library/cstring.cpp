@@ -3,6 +3,13 @@
 
 extern "C" {
 
+int strlen(const char *str) {
+    char *_str = (char*)str;
+    int len = 0;
+    for (char *c = &_str[0]; *c != '\0'; c++, len++);
+    return len;
+}
+
 char *itoa(int n, char *buf, int base) {
     char *p = buf + 20;
 
