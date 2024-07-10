@@ -1,7 +1,6 @@
 #pragma once
 
-#include <stddef.h>
-#include <stdint.h>
+#include <sys/defines.h>
 
 #define FREE 0
 #define USED 1
@@ -11,7 +10,8 @@
 namespace Heap {
     void Install(uint32_t size);
     void *Allocate(uint32_t size);
-    //void Free(void *block); // Not useful right now since the heap is very basic
+    void Free(void *block);
 }
 
 void *operator new(size_t size);
+void operator delete(void *block);

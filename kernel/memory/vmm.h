@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include <sys/defines.h>
 
 namespace VirtMemory {
     namespace Page {

@@ -1,5 +1,4 @@
 #include <library/cstdlib.h>
-#include <stdint.h>
 
 extern "C" {
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stddef.h>
+#include <sys/defines.h>
 
 extern "C" {
 
