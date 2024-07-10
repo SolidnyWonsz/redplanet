@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
+#include <sys/defines.h>
 
 namespace IO {
 	static inline void outb(uint16_t port, uint8_t val) {
