@@ -30,7 +30,7 @@ void PhysMemory::FreeBlock(uint32_t block) {
     CLEARBIT(block);
 }
 
-void PhysMemory::Install(uint64_t memory_size) {
+void PhysMemory::Install(uint32_t memory_size) {
     total_block = memory_size / MEMBLOCKSIZE;
     uint32_t bmsz = total_block / BLKPERBCKT;
 

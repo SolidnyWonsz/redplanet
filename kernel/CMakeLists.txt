@@ -8,8 +8,8 @@ set(KERNEL_SOURCES
 	library/cstring.cpp
 	#memory/pmm.cpp
 	memory/vmm.cpp
-	tasking/task.cpp
-	tasking/scheduler.cpp
+	#tasking/task.cpp
+	#tasking/scheduler.cpp
 	memory/heap.cpp
 	debug/assert.cpp
 )

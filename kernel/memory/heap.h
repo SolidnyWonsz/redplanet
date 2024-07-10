@@ -9,7 +9,7 @@
 
 namespace Heap {
     void Install(uint32_t size);
-    void *Allocate(uint32_t size);
+    void *Allocate(size_t size);
     void Free(void *block);
 }
 

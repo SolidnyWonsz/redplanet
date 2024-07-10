@@ -1,6 +1,6 @@
 #include <memory/heap.h>
 #include <debug/assert.h>
-
+#include <init/console.h>
 
 // I know the code doesn't look or work very well but I'm still
 // pretty much a noob with C++. I'm more of a C guy, ya know.
@@ -49,6 +49,7 @@ void Heap::Install(uint32_t size) {
         return;
     }
 
+    kprint("Setting up KHeap\n");
     KernelHeap::Initialized = true;
     KernelHeap::StartAddr = (uintptr_t*)&kernel_end;
     KernelHeap::EndAddr = KernelHeap::StartAddr + size + 1025; // It points to memory address after the bitmap
