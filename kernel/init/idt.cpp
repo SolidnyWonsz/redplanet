@@ -1,8 +1,18 @@
 #include <init/idt.h>
 #include <init/asm.h>
 
-static IDT::Entry idt[256];
-static IDT::Pointer idtr;
+static struct Entry {
+    uint16_t isr_low;
+    uint16_t selector;
+    uint8_t reserved;
+    uint8_t attributes;
+    uint16_t isr_high;
+} __attribute__((packed)) idt[256];
+
+static struct Pointer {
+    uint16_t limit;
+    uint32_t base;
+} __attribute__((packed)) idtr;
 
 static void InstallPIC() {
     IO::outb(0x20, 0x11);
@@ -27,7 +37,7 @@ void IDT::SetGate(uint16_t entry, void *interrupt, uint8_t flag) {
 
 void IDT::Install() {
     idtr.base = (uintptr_t)&idt;
-    idtr.limit = (uint16_t)sizeof(IDT::Entry) * 256 - 1;
+    idtr.limit = (uint16_t)sizeof(Entry) * 256 - 1;
 
     InstallPIC();
 
