@@ -2,6 +2,9 @@
 
 #include <sys/defines.h>
 
+#define IRQ_ENTER __asm__("pusha");
+#define IRQ_LEAVE __asm__("popa"); __asm__("leave"); __asm__("iret");
+
 namespace IO {
 	static inline void outb(uint16_t port, uint8_t val) {
 		asm volatile ( "outb %0, %1" : : "a"(val), "Nd"(port) );

@@ -12,7 +12,7 @@ SECTIONS
  
 	.rodata BLOCK(4K) : ALIGN(4K)
 	{
-		*(.rodata)
+		*(.rdata*)
 	}
  
 	.data BLOCK(4K) : ALIGN(4K)

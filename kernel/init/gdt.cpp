@@ -1,4 +1,5 @@
 #include "gdt.h"
+#include <init/console.h>
 
 #define BIT32 0xFFFFFFFF
 
@@ -30,5 +31,6 @@ void GDT::Install() {
     GDT::SetGate(4, 0, BIT32, 0xF2, 0xCF);
 
     asm volatile("lgdt %0" : : "m"(gdtr));
+    kprint("Flushing\n");
     gdt_flush();
 }

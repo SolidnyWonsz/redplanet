@@ -1,48 +1,52 @@
+#include <library/cstdlib.h>
+
 #pragma once
 
 #include <sys/limits.h>
+#include <sys/defines.h>
 
 typedef int PID;
 
-namespace Tasking {
-    class Task {
-        public:
-            Task(const char *name, bool ispriviliged);
-            ~Task();
+struct ProcessContext {
+    uint32_t esp, ebp, eip;
+    uint32_t esi, edi;
+    uint32_t eax, ebx, ecx, edx;
+    uint32_t eflags, cr3;
+};
 
-            void ElevatePrivilages();
-            void Kill();
+class Process {
+    // Object methods
+    public:
+        void ElevatePrivilages();
+        void Kill();
+        PID GetPid();
+        char *GetName();
+        void Reparent(Process NewParent);
 
-            PID GetPid();
-            char *GetName();
+        enum {
+            Unused = 0,
+            Ready = 1,
+            Running = 2,
+            Waiting = 3,
+            NoTask = 4      // To clarify:
+                            // No task means process has been created, but
+                            // there's no task assigned to it, so it will be
+                            // allocated in memory, but it won't get scheduled.
+        } State;
+        ProcessContext Context;
 
-            void Reparent(Task *NewParent);
-        private:
-            PID pid;
-            char name[PROC_MAXNAME];
-            Task *parent;
+    private:
+        PID pid;
+        char *Name;
+        Process *Parent;
+        bool isPriviliged;
 
-            bool isPriviliged;
-    };
+    // Global methods
+    public:
+        static void Install();
+        static void Schedule(Registers regs);
+        static Process &Spawn(const char *name);
 
-    class Scheduler {
-        public:
-            Scheduler(Scheduler &other) = delete;
-
-            static Scheduler *self() {
-                return &_scheduler;
-            }
-
-            Task *CurrentTask();
-
-            void Initialize();
-            void Schedule();
-
-        private:
-            Scheduler() {}
-            ~Scheduler() {}
-
-            static Scheduler _scheduler;
-            Task *currentTask;
-    };
-}
+        static Process &Current();
+        static Process &Init();
+};

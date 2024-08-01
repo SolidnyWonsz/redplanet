@@ -1,3 +1,5 @@
+#include <sys/defines.h>
+
 extern "C" {
 
 void *__dso_handle = nullptr;
@@ -38,6 +40,12 @@ void __cxa_finalize(void *f) {
             __atexit_func_entry_t[i].destructor = 0;
         }
     }
+}
+
+namespace __cxxabiv1 {
+
+typedef uint64_t __guard;
+
 }
 
 }

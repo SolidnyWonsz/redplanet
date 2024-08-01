@@ -1,4 +1,5 @@
 set(KERNEL_SOURCES
+	debug/assert.cpp
 	init/main.cpp
 	init/console.cpp
 	init/boot.s
@@ -6,12 +7,12 @@ set(KERNEL_SOURCES
 	init/idt.cpp
 	library/cstdlib.cpp
 	library/cstring.cpp
-	#memory/pmm.cpp
+	library/cxxabi.cpp
 	memory/vmm.cpp
-	#tasking/task.cpp
-	#tasking/scheduler.cpp
 	memory/heap.cpp
-	debug/assert.cpp
+	tasking/scheduler.cpp
+	tasking/process.cpp
+	timer/timer.cpp
 )
 
 add_link_options(-T${PROJECT_SOURCE_DIR}/kernel/init/linker.ld)

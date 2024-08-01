@@ -1,5 +1,6 @@
 #include <init/idt.h>
 #include <init/asm.h>
+#include <timer/timer.h>
 
 static struct Entry {
     uint16_t isr_low;
@@ -35,6 +36,12 @@ void IDT::SetGate(uint16_t entry, void *interrupt, uint8_t flag) {
     idt[entry].reserved = 0;
 }
 
+static void KeyboardHandler() {
+    IRQ_ENTER;
+    IO::inb(0x60);
+    IRQ_LEAVE;
+}
+
 void IDT::Install() {
     idtr.base = (uintptr_t)&idt;
     idtr.limit = (uint16_t)sizeof(Entry) * 256 - 1;
@@ -43,6 +50,9 @@ void IDT::Install() {
 
     IO::outb(0x21,0xfd);
     IO::outb(0xa1,0xff);
+
+    //IDT::SetGate(32, (void*)Timer::Handler, 0x8E);
+    IDT::SetGate(33, (void*)KeyboardHandler, 0x8E);
 
     __asm__ volatile ("lidt %0" : : "m"(idtr));
     __asm__ volatile ("sti");
