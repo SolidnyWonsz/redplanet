@@ -1,6 +1,6 @@
 #include <memory/heap.h>
 #include <debug/assert.h>
-#include <init/console.h>
+#include <arch/init/console.h>
 
 // I know the code doesn't look or work very well but I'm still
 // pretty much a noob with C++. I'm more of a C guy, ya know.

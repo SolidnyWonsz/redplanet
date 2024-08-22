@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sys/defines.h>
+#include <common/defines.h>
 
 #define IRQ_ENTER __asm__("pusha");
 #define IRQ_LEAVE __asm__("popa"); __asm__("leave"); __asm__("iret");

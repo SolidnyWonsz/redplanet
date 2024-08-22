@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include <sys/limits.h>
-#include <sys/defines.h>
+#include <common/limits.h>
+#include <common/defines.h>
 
 typedef int PID;
 

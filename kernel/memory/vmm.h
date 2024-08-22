@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sys/defines.h>
+#include <common/defines.h>
 
 struct PageTable {
     uint32_t pages[1024];

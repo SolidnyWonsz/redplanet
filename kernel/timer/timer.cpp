@@ -1,7 +1,7 @@
 #include <timer/timer.h>
-#include <init/asm.h>
+#include <arch/cpu/asm.h>
 #include <tasking/scheduler.h>
-#include <init/pic.h>
+#include <arch/cpu/pic.h>
 
 void Timer::Handler(Registers regs) {
     IRQ_ENTER;

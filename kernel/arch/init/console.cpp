@@ -1,7 +1,7 @@
 //Early console code.
 
-#include "console.h"
-#include <stdint.h>
+#include <arch/init/console.h>
+#include <common/defines.h>
 
 static volatile uint16_t *vidmem = (volatile uint16_t*)0xB8000;
 

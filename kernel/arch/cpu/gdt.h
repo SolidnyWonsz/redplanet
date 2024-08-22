@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sys/defines.h>
+#include <common/defines.h>
 
 namespace GDT {
     struct Entry {

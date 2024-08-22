@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sys/defines.h>
+#include <common/defines.h>
 
 #define IRQBASE 31
 

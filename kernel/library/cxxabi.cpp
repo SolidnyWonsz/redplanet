@@ -1,4 +1,4 @@
-#include <sys/defines.h>
+#include <common/defines.h>
 
 extern "C" {
 

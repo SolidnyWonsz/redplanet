@@ -1,6 +1,9 @@
-#include <init/idt.h>
-#include <init/asm.h>
+#include <arch/cpu/idt.h>
+#include <arch/cpu/asm.h>
+#include <arch/cpu/pic.h>
 #include <timer/timer.h>
+#include <arch/init/console.h>
+#include <arch/cpu/exceptions.h>
 
 static struct Entry {
     uint16_t isr_low;
@@ -36,10 +39,21 @@ void IDT::SetGate(uint16_t entry, void *interrupt, uint8_t flag) {
     idt[entry].reserved = 0;
 }
 
+char map_us[0x100] = {
+	0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '\b', '\t',
+	'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n', 0,
+	'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`', 0, '\\',
+	'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 0, '*', 0, ' '
+};
+
 static void KeyboardHandler() {
     IRQ_ENTER;
-    IO::inb(0x60);
-    IRQ_LEAVE;
+    char c = IO::inb(0x60);
+    kputc(map_us[c]);
+    PIC::ACK(1);
+    asm("popa");
+    asm("leave");
+    asm("iret");
 }
 
 void IDT::Install() {
@@ -47,6 +61,7 @@ void IDT::Install() {
     idtr.limit = (uint16_t)sizeof(Entry) * 256 - 1;
 
     InstallPIC();
+    Exception::Install();
 
     IO::outb(0x21,0xfd);
     IO::outb(0xa1,0xff);

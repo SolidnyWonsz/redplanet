@@ -1,9 +1,9 @@
 #include <tasking/scheduler.h>
-#include <init/console.h>
-#include <init/idt.h>
+#include <arch/init/console.h>
+#include <arch/cpu/idt.h>
 #include <memory/vmm.h>
 #include <library/array.h>
-#include <init/console.h>
+#include <arch/init/console.h>
 #include <library/cstring.h>
 
 // It's fixed sized array for now, just for testing.

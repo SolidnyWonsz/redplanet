@@ -1,5 +1,5 @@
 #include "gdt.h"
-#include <init/console.h>
+#include <arch/init/console.h>
 
 #define BIT32 0xFFFFFFFF
 

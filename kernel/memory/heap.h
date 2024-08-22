@@ -1,6 +1,6 @@
 #pragma once
 
-#include <sys/defines.h>
+#include <common/defines.h>
 
 #define FREE 0
 #define USED 1

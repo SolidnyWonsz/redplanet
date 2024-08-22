@@ -1,5 +1,5 @@
 #include <debug/assert.h>
-#include <init/console.h>
+#include <arch/init/console.h>
 
 void kassert(const char *expr, const char *file, int line, const char *func) {
     asm volatile("cli");

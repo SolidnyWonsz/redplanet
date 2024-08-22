@@ -1,7 +1,7 @@
-#include <init/exceptions.h>
-#include <init/idt.h>
-#include <init/console.h>
-#include <init/asm.h>
+#include <arch/cpu/exceptions.h>
+#include <arch/cpu/idt.h>
+#include <arch/init/console.h>
+#include <arch/cpu/asm.h>
 
 const char *exceptions[15] = {
     "Division by zero",
@@ -22,15 +22,13 @@ const char *exceptions[15] = {
 };
 
 void Exception::Handler(Registers regs) {
-    IRQ_ENTER
-    kprint(exceptions[regs.int_no]);
-    kprint(" occured!\nHalting\n");
-    asm("cli; hlt");
-    for (;;);
+    kprint("yoyoyoyo\n");
+    //asm("cli; hlt");
+    //for (;;);
 }
 
 void Exception::Install() {
     for (int i = 0; i < 16; i++) {
-        IDT::SetGate(i, Exception::Handler, 0x8E);
+        IDT::SetGate(i, (void*)Exception::Handler, 0x8E);
     }
 }
