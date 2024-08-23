@@ -6,17 +6,21 @@ set(CMAKE_SYSTEM_NAME "Red Planet")
 set(CMAKE_CXX_COMPILER i686-elf-gcc)
 set(CMAKE_ASM_COMPILER i686-elf-as)
 
-if (${RPPROJ_DEBUG})
-    set(DEBUGCMD -s -S)
-endif()
-
 add_subdirectory(kernel)
+
+set(QEMU_OPTIONS -m 64M)
 
 # TO DO:
 # Make better "qemu-run" target that actually knows where Red Planet's binary is located.
 
 add_custom_target(qemu-run
-    COMMAND qemu-system-i386 ${DEBUGCMD} -kernel ${CMAKE_BINARY_DIR}/kernel/redplanet -m 64M
+    COMMAND qemu-system-i386 -kernel ${CMAKE_BINARY_DIR}/kernel/redplanet ${QEMU_OPTIONS}
+    DEPENDS redplanet
+    USES_TERMINAL
+)
+
+add_custom_target(qemu-gdb-run
+    COMMAND qemu-system-i386 -s -S -kernel ${CMAKE_BINARY_DIR}/kernel/redplanet ${QEMU_OPTIONS}
     DEPENDS redplanet
     USES_TERMINAL
 )
